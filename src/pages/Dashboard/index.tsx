@@ -39,7 +39,7 @@ const Dashboard: React.FC = () => {
     food: Omit<IFoodPlate, 'id' | 'available'>,
   ): Promise<void> {
     try {
-      const newFood = await api.post('/foods', food);
+      const newFood = await api.post('/foods', { ...food, available: true });
 
       setFoods([...foods, newFood.data]);
     } catch (err) {
@@ -78,7 +78,7 @@ const Dashboard: React.FC = () => {
 
   function handleEditFood(food: IFoodPlate): void {
     setEditingFood(food);
-    setEditModalOpen(true);
+    toggleEditModal();
   }
 
   return (
